@@ -34,6 +34,16 @@ RUN apt-get install -y postgresql-9.5-postgis-2.2 netcat
 # Open port 5432 so linked containers can see them
 EXPOSE 5432
 
+# add backup scripts
+ADD backup.sh /usr/local/bin/backup
+ADD restore.sh /usr/local/bin/restore
+ADD list-backups.sh /usr/local/bin/list-backups
+
+# make them executable
+RUN chmod +x /usr/local/bin/restore
+RUN chmod +x /usr/local/bin/list-backups
+RUN chmod +x /usr/local/bin/backup
+
 # Run any additional tasks here that are too tedious to put in
 # this dockerfile directly.
 ADD setup.sh /setup.sh

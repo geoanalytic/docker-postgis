@@ -156,7 +156,28 @@ docker run -d -v $HOME/postgres_data:/var/lib/postgresql kartoza/postgis`
 You need to ensure the ``postgres_data`` directory has sufficient permissions
 for the docker process to read / write it.
 
+## Backups   
 
+Backup and restore scripts shameless stolen from cookiecutter-django have been added.   
+To create a backup, run:
+
+```
+docker-compose -f dev.yml run postgres backup
+```
+
+To list backups, run:
+
+```
+docker-compose -f dev.yml run postgres list-backups
+```
+
+To restore a backup, run:   
+
+```
+docker-compose -f dev.yml run postgres restore filename.sql
+```
+
+Note that the `-f dev.yml` is dependant on the docker-compose recipe you are running, and that the name of the container in the examples given above is `postgres` which may be different depending on your setup.   
 
 ## Credits
 
